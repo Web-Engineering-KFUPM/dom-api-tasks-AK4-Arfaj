@@ -117,3 +117,24 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+
+let weatherBtn = document.getElementById("t4-loadWx")
+let weatherTemp = document.getElementById("t4-temp")
+let weatherHumidity = document.getElementById("t4-hum")
+let weatherWind = document.getElementById("t4-wind")
+
+weatherBtn.addEventListener("click", async () => {
+
+    const base  = "https://api.openweathermap.org/data/2.5/weather";
+    const city  = "Dammam";
+    const units = "metric";
+    const key   = "9c29da573838fd8cdd561179419142d7";  // replace with your key for this lab
+    const url = `${base}?q=${encodeURIComponent(city)}&appid=${key}&units=${units}`;
+
+    let response = await fetch(url)
+    let weatherJson = await response.json()
+    weatherTemp.textContent = weatherJson["main"]["temp"] + " °C"
+    weatherHumidity.textContent = weatherJson["main"]["humidity"] + "%"
+    weatherWind.textContent = weatherJson["wind"]["speed"] + " m/s"
+    console.log(weatherJson)
+})
