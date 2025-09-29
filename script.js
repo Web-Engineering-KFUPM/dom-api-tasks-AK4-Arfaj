@@ -46,8 +46,10 @@ button.addEventListener("click", function () {
 });
 */
 
+// grabbing the button element
 let button = document.getElementById("t2-btn")
  
+// on click event listener
 button.addEventListener("click", function () {
     document.getElementById("t2-status").textContent = "You clicked the button!"
 });
@@ -79,6 +81,17 @@ data.content   // the quote text
 data.author    // the author
 */
  
+let quoteBtn = document.getElementById("t3-loadQuote")
+let quoteElement = document.getElementById("t3-quote")
+let quoteAuthor = document.getElementById("t3-author")
+
+quoteBtn.addEventListener("click", async () => {
+    let response = await fetch("https://dummyjson.com/quotes/random")
+    let quoteJson = await response.json()
+    quoteElement.textContent = quoteJson["quote"]
+    quoteAuthor.textContent = quoteJson["author"]
+})
+
 
 /*  
 =======================================
